@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    
+// Saludos
+<category>  
+<pattern>Estas *</pattern>  
+<template>Estoy <person><star/></person></template>  
+</category>
+
+<category>
+    <pattern>Hola</pattern>
+    <template>
+        <card>
+            <image>https://cdn.pixabay.com/photo/2019/03/21/15/51/chatbot-4071274_960_720.jpg</image>
+	        <title>Información turistica</title>
+	        <subtitle>Bienvenido, ¿en que puedo ayudarle? </subtitle>
+        </card>
+        </template>
+</category>
+<category><pattern>Hola *</pattern><template><srai>Hola</srai></template></category>
+<category><pattern>Saludos *</pattern><template><srai>Hola</srai></template></category>
+<category><pattern>Saludos</pattern><template><srai>Hola</srai></template></category>
+
+<category>
+    <pattern>adios</pattern>
+    <template>
+    <card>
+        <image>https://cdn.pixabay.com/photo/2019/03/21/15/51/chatbot-4071274_960_720.jpg</image>
+        <title>Hasta pronto</title>
+	    <subtitle>Encantado de haberle ayudado</subtitle>
+    </card>
+    Espero volverle a ver pronto por aquí
+    </template>
+</category>
+<category>
+    <pattern>gracias</pattern>
+    <template>
+    <card>
+        <image>https://cdn.pixabay.com/photo/2019/03/21/15/51/chatbot-4071274_960_720.jpg</image>
+        <title>Es un placer ayudarle</title>
+    </card>
+    </template>
+</category>
+
+// Lugar indefinido
+<category>
+    <pattern>Lugar</pattern>
+    <template>Sobre que lugar me estas preguntando?</template>
+</category>
+<category>
+    <pattern>sobre *</pattern>
+    <template>
+    <think><set name="alli"><star/></set></think>
+    Perfecto, dime que quieres saber sobre <star/>
+    </template>
+</category>
+
+<category>
+    <pattern>Me gustaria viajar a *</pattern>
+    <template> 
+        <think><set name="alli"><star/></set></think>
+        <star/> es un buen lugar para viajar. ¿Que quieres saber sobre <star/>?
+    </template>
+</category>
+<category>
+    <pattern>Me gustaria viajar alli</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Me gustaria viajar a <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template>
+</category>
+
+<category>
+<pattern>cual es la capital de <set>paises</set></pattern>
+<template>
+<think><set name="alli"><star/></set></think>
+<map name="capitales"><star/></map> Es la capital de <star/>
+</template>
+</category>
+<category>
+<pattern>Sabes cual es la capital de <set>paises</set></pattern>
+<template>
+<think><set name="alli"><star/></set></think>
+<map name="capitales"><star/></map> Es la capital de <star/>
+</template>
+</category>
+<category>
+<pattern>Dime cual es su capital</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>cual es la capital de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template>
+</category>
+<category>
+<pattern>Sabes cual es su capital</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>cual es la capital de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template>
+</category>
+<category>
+<pattern>cual es su capital</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>cual es la capital de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template>
+</category>
+<category>
+<pattern>* capital de <set>paises</set></pattern>
+<template>
+<map name="capitales"><star/></map> Es la capital de <star/>
+</template>
+</category>
+
+
+// Información sobre un lugar
+<category>
+    <pattern>Necesito informacion sobre *</pattern>
+    <template> 
+        <think><set name="alli"><star/></set></think>
+        Aquí tienes algo de información sobre <star/>
+        <button>
+            <text>Pulsa aquí para verla</text>
+            <url>https://es.wikipedia.org/wiki/<star/></url>
+        </button>
+    </template>
+</category>
+<category>
+    <pattern>Necesito informacion de alli</pattern>
+    <template>
+        <condition name="alli">
+            <li value="*"><srai>Necesito informacion sobre <get name="alli"/></srai></li>
+            <li><srai>Lugar</srai></li>
+        </condition>
+    </template>
+</category>
+
+<category><pattern>Quiero informacion sobre *</pattern>
+<template><think><set name="alli"><star/></set></think>
+    <srai>Necesito informacion sobre <get name="alli"/></srai>
+</template></category>
+<category><pattern>Me puedes dar informacion sobre *</pattern>
+<template><think><set name="alli"><star/></set></think>
+    <srai>Necesito informacion sobre <get name="alli"/></srai>
+</template></category>
+<category><pattern>Me gustaria saber informacion sobre *</pattern>
+<template><think><set name="alli"><star/></set></think>
+    <srai>Necesito informacion sobre <get name="alli"/></srai>
+</template></category>
+<category><pattern>Tienes informacion de *</pattern>
+<template><think><set name="alli"><star/></set></think>
+    <srai>Necesito informacion sobre <get name="alli"/></srai>
+</template></category>
+
+<category><pattern>Quiero informacion</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Necesito informacion sobre <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Dame informacion</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Necesito informacion sobre <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+
+
+<category>
+    <pattern>Enseñame un mapa de *</pattern>
+    <template> 
+        <think><set name="alli"><star/></set></think>
+        Aquí puedes ver un mapa de <star/>
+        <button>
+            <text>Pulsa aquí para verlo</text>
+            <url>https://www.google.es/maps/place/<star/></url>
+        </button>
+    </template>
+</category>
+<category>
+    <pattern>Enseñame un mapa de alli</pattern>
+    <template>
+        <condition name="alli">
+            <li value="*"><srai>Enseñame un mapa de <get name="alli"/></srai></li>
+            <li><srai>Lugar</srai></li>
+        </condition>
+    </template>
+</category>
+<category>
+    <pattern>Quiero ver un mapa de alli</pattern>
+    <template>
+        <condition name="alli">
+            <li value="*"><srai>Enseñame un mapa de <get name="alli"/></srai></li>
+            <li><srai>Lugar</srai></li>
+        </condition>
+    </template>
+</category>
+<category><pattern>Quiero ver un mapa</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame un mapa de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Enseñame el mapa</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame un mapa de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Quiero ver el mapa de alli</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame un mapa de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Muestrame el mapa</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame un mapa de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>quiero ver el mapa</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame un mapa de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+
+<category>
+    <pattern>Enseñame el tiempo de * </pattern>
+    <template> 
+        <think><set name="alli"><star/></set></think>
+        Espero que haga buen tiempo en <star/>
+        <button>
+            <text>Pulsa aquí para verlo</text>
+            <url>https://www.weather-forecast.com/locations/<formal><star/></formal>/forecasts/latest</url>
+        </button>
+    </template>
+</category>
+<category>
+    <pattern>Enseñame el tiempo de alli</pattern>
+    <template>
+        <condition name="alli">
+            <li value="*"><srai>Enseñame el tiempo de <get name="alli"/></srai></li>
+            <li><srai>Lugar</srai></li>
+        </condition>
+    </template>
+</category>
+<category>
+    <pattern>Que tiempo hace alli</pattern>
+    <template>
+        <condition name="alli">
+            <li value="*"><srai>Enseñame el tiempo de <get name="alli"/></srai></li>
+            <li><srai>Lugar</srai></li>
+        </condition>
+    </template>
+</category>
+<category><pattern>Que tiempo hace</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame el tiempo de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Que tiempo esta haciendo</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame el tiempo de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+
+<category>
+    <pattern>Enseñame hoteles de  *</pattern>
+    <template> 
+        <think><set name="alli"><star/></set></think>
+        Conozco un buen sitio para buscar hoteles en <star/>
+        <button>
+            <text>Pulsa aquí para verlos</text>
+            <url>https://www.booking.com/<star/></url>
+        </button>
+    </template>
+</category>
+<category>
+    <pattern>* hoteles</pattern>
+    <template>
+        <condition name="alli">
+            <li value="*"><srai>Enseñame hoteles de <get name="alli"/></srai></li>
+            <li><srai>Lugar</srai></li>
+        </condition>
+    </template>
+</category>
+
+<category><pattern>donde puedo dormir *</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame hoteles de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Buscame un hotel</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame hoteles de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Encuentrame un hotel</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Enseñame hoteles de <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+
+<category>
+    <pattern>Que puedo ver en *</pattern>
+    <template> 
+        <think><set name="alli"><star/></set></think>
+        Hay muchas cosas para ver en <star/>
+        <button>
+            <text>Pulsa aquí para verlas</text>
+            <url>https://www.minube.com/que_ver/<star/></url>
+        </button>
+    </template>
+</category>
+<category>
+    <pattern>Enseñame cosas que ver alli</pattern>
+    <template>
+        <condition name="alli">
+            <li value="*"><srai>Que puedo ver en <get name="alli"/></srai></li>
+            <li><srai>Lugar</srai></li>
+        </condition>
+    </template>
+</category>
+<category><pattern>Que puedo visitar</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Que puedo ver en <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+<category><pattern>Que puedo ver alli</pattern>
+<template>
+    <condition name="alli">
+        <li value="*"><srai>Que puedo ver en <get name="alli"/></srai></li>
+        <li><srai>Lugar</srai></li>
+    </condition>
+</template></category>
+
+
+<category><pattern>*</pattern>
+<template>
+No tengo respuesta para eso.
+Quizás podrías probar a preguntarlo de otro modo
+    </template>
+</category>
+
+</aiml>
